@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block site_title %}
+Home
+{% endblock site_title %}
+
+{% block extra_js %}
+{% endblock extra_js %}
+
+
+{% block content %}
+    {% for article in articles %}
+    {% include "components/article_card.html" with article=article %}
+    {% empty %}
+    <p>No articles available.</p>
+    {% endfor %}
+{% endblock content %}
+
+

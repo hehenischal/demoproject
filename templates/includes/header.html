@@ -1,0 +1,37 @@
+<style>
+    .nav-link {
+        color: orange;
+    }
+    .nav-link.active {
+        color: red !important;
+        text-decoration:underline;
+        text-underline-offset: 5px;
+    }
+</style>
+<header>
+    <nav
+        class="nav justify-content-center">
+        <a class="nav-link" href="{% url 'articles:home' %}">Home</a>
+        <a class="nav-link" href="{% url 'articles:create' %}">Write</a>
+        {% if user.is_authenticated %}
+
+        <form action="{% url 'accounts:logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="nav-link btn btn-link">Logout</button>
+        </form>
+        {% else %}
+        <a class="nav-link " href="{% url 'accounts:login' %}">Login</a>
+        {% endif %}
+    </nav>
+    <script>
+
+        let navs = document.querySelectorAll('.nav-link');
+        navs.forEach(nav => {
+            if (nav.href === window.location.href) {
+                nav.classList.add('active');
+                nav.ariaCurrent = "page";
+            }
+        });
+    </script>
+
+</header>
